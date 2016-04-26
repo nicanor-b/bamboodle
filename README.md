@@ -1,7 +1,7 @@
 # bamboodle
 
-### Extension for pandas enabling direct processing and statistical analysis of Moodle log files
-#### Developed by Nick Burkhart (nickburkhart.com)
+#### Extension for pandas enabling direct processing and statistical analysis of Moodle log files
+###### Developed by Nick Burkhart (nickburkhart.com)
 
 Additional documentation will be added shortly.
 
@@ -44,30 +44,30 @@ ip_list = ["192.168.0.0/16","10.0.0.0/16"]
 print bb.ip_networks(ip_list).load_grades('Fall2015_Grades.csv','assignment3')
 ```
 
-Calculates percentage of time that user(s) is/are within the networks passed to this function
+Calculates percentage of time that user(s) is/are within the networks passed to this function:
 ```
 ip_list = ["192.168.0.0/16","10.0.0.0/16"]
 print bb.filter_user('NAME, USER').ip_networks(ip_list)
 ```
 
-Calculates percentage of time that user(s) is/are within the networks passed to this function, as well as K-means cluster (4 total clusters) for this attribute; grades for assignment are joined also
+Calculates percentage of time that user(s) is/are within the networks passed to this function, as well as K-means cluster (4 total clusters) for this attribute; grades for assignment are joined also:
 ```
 ip_list = ["192.168.0.0/16","10.0.0.0/16"]
 print bb.ip_networks(ip_list).cluster("IP address in network(s)",4).load_grades('Fall2015_Grades.csv','assignment3')
 ```
 
-Performs one-way ANOVA test of midterm exam score across cluster groups set up on basis of on-campus vs. off-campus IP use
+Performs one-way ANOVA test of midterm exam score across cluster groups set up on basis of on-campus vs. off-campus IP use:
 ```
 ip_list = ["192.168.0.0/16","10.0.0.0/16"]
 print bb.ip_networks(ip_list).cluster("IP address in network(s)").load_grades('Fall2015_Grades.csv','midterm').replace('-', 0).anova("midtern","cluster")
 ```
 
-Performs one-way ANOVA test of 
+Performs one-way ANOVA test of midterm exam score across cluster groups set up on basis of mean weekday of activity:
 ```
 print bb.mean_weekday_activity().cluster("Mean weekday").load_grades('Fall2015_Grades.csv','midterm').replace('-', 0).anova("midterm","cluster")
 ```
 
-Runs an OLS regression model using midterm grades as dependent variable and (1) on-campus vs. off-campus IP use and (2) average weekday of content access as dependent variables
+Runs an OLS regression model using midterm grades as dependent variable and (1) on-campus vs. off-campus IP use and (2) average weekday of content access as dependent variables:
 ```
 ip_list = ["192.168.0.0/16","10.0.0.0/16"]
 ips = bb.ip_networks(ip_list)
