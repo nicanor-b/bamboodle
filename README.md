@@ -67,7 +67,7 @@ Performs one-way ANOVA test of midterm exam score across cluster groups set up o
 print bb.mean_weekday_activity().cluster("Mean weekday").load_grades('Fall2015_Grades.csv','midterm').replace('-', 0).anova("midterm","cluster")
 ```
 
-Runs an OLS regression model using midterm grades as dependent variable and (1) on-campus vs. off-campus IP use and (2) average weekday of content access as dependent variables:
+Runs an OLS regression model using midterm grades as dependent variable and (1) on-campus vs. off-campus IP use and (2) average weekday of content access as independent variables:
 ```
 ip_list = ["192.168.0.0/16","10.0.0.0/16"]
 ips = bb.ip_networks(ip_list)
