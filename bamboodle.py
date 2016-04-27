@@ -10,6 +10,8 @@ import numpy as np
 import scipy
 import statsmodels.api as sm
 from sklearn.cluster import KMeans
+from matplotlib import pyplot
+from beeswarm import *
 
 class Bamboodle(pandas.DataFrame):
 	# CLASS SETUP
@@ -41,7 +43,7 @@ class Bamboodle(pandas.DataFrame):
 		return self[(self["User full name"] == user)]
 	# Returns data frame filtered by activity
 	def filter_fieldsearch(self,field,search):
-		return self[(self[field].contains(search))]
+		return self[(self[field].str.contains(search))]
 		
 	# Subcategory: STATISTICAL TESTS AND ANALYSIS
 	# One-way analysis of variance test (ANOVA)
@@ -172,3 +174,22 @@ class Bamboodle(pandas.DataFrame):
 				pass
 		feature_collection = geojson.FeatureCollection(features)
 		return geojson.dumps(feature_collection, sort_keys=True)
+	
+	# Subcategory: VISUALIZATION METHODS
+	# Box Plot
+	def draw_box(self,columns,path=None):
+		plot = self[columns].plot.box()
+		if path is not None:
+			fig = plot.get_figure()
+			fig.savefig(path)
+	# Swarm plot
+	def draw_swarm(self,columns,path=None):
+		values = []
+		for column in self[columns]:
+			values.append(self[column].values)
+		fig = pyplot.figure()
+		ax = fig.add_subplot(111)
+		beeswarm(values, method="square", labels=columns, ax=ax)
+		if path is not None:
+			fig.savefig(path)
+	
