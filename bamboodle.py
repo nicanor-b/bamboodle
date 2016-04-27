@@ -182,6 +182,8 @@ class Bamboodle(pandas.DataFrame):
 		if path is not None:
 			fig = plot.get_figure()
 			fig.savefig(path)
+		else:
+			return fig
 	# Swarm plot
 	def draw_swarm(self,columns,path=None):
 		values = []
@@ -192,4 +194,6 @@ class Bamboodle(pandas.DataFrame):
 		beeswarm(values, method="square", labels=columns, ax=ax)
 		if path is not None:
 			fig.savefig(path)
+		else:
+			return fig
 	
